@@ -1,3 +1,7 @@
+"""
+This module is concerned with file IO. The functions should be self-explanatory.
+"""
+
 from viewing import desugar
 from rendering import render
 

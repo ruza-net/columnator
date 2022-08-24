@@ -1,3 +1,7 @@
+"""
+This module is the main program. See comments below for the exact control flow.
+"""
+
 import sys
 import time
 import shutil
@@ -15,6 +19,8 @@ def print_usage():
 	sys.exit(1)
 
 
+# Command-line arguments
+#
 _, model_name, view_name, tab_width, tab_fill = \
 	sys.argv + [4, ' '] if len(sys.argv) == 3 else \
 	sys.argv + [' '] if len(sys.argv) == 4 else \
@@ -22,11 +28,15 @@ _, model_name, view_name, tab_width, tab_fill = \
 	print_usage()
 
 
+# Check that tab width is a number
+#
 try:
 	tab_width = int(tab_width)
 except ValueError:
 	print_usage()
 
+# Check that tab fill is a single character
+#
 if len(tab_fill) != 1:
 	print_usage()
 
@@ -44,6 +54,8 @@ asdhfiwuho
 as	ieu
 '''
 
+# Print info about current settings + example render
+#
 print('INFO: Running columnator with following config:')
 print(f'\ttab width = {tab_width}')
 print(f'\tmodel file = {model_name}')
@@ -56,6 +68,8 @@ print('...would be rendered as follows:')
 print('\n\t'.join(render(tab_width, tab_fill, example).split('\n')))
 
 
+# Override view with initial model
+#
 model = load(model_name)
 render_model(tab_width, tab_fill, view_name, model)
 
@@ -71,6 +85,9 @@ while True:
 		model_will_update = False
 	
 	elif model == '':
+		#
+		# This uses a behaviour of files, which become empty right before save.
+		
 		print('INFO: model will update')
 		model_will_update = True
 	
@@ -78,11 +95,17 @@ while True:
 	
 	if view_will_update:
 		update_model(tab_width, tab_fill, model_name, view)
+		
 		time.sleep(0.1)
+		#
+		# So that no glitches occur
 		
 		view_will_update = False
 		model_will_update = True
 	
 	elif view == '':
+		#
+		# Dtto.
+		
 		print('INFO: view will update')
 		view_will_update = True
