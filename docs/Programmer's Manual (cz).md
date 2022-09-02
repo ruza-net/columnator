@@ -16,13 +16,13 @@ Columnator běží nepřetržitě, přičemž donekonečna alternuje mezi násle
 Čtení a zápis do souborů jsou optimalizovány tak, aby nedocházelo k záškubům a aby bylo respektování chování souborů při přepisování
 (soubory jsou těsně před zápisem zbaveny veškerého obsahu).
 
-Základní běh je možno najít v modulu `columnator.py`, souborové operace pak v modulu `fileworks.py`.
+Základní běh je možno najít jako top-level kód v modulu `columnator.py`, souborové operace pak v modulu `fileworks.py`.
 
 ## Nahrazení tabulátorů
 Jedná se o vcelku triviální operaci, kdy je spočten v rámci neporušené posloupnosti tabulátorů daného indexu nejzazší pravý okraj.
 K němu jsou pak ve všech zúčastněných řádcích doplněny výplňové znaky. Celá operace probíhá rekurzivně podle hloubky odsazení.
 
-Viz modul `rendering.py`.
+Viz modul `rendering.py`, výchozí funkce je `render(tab_width, tab_fill, model)`.
 
 ## Odvození tabulátorů z výplně
 Jedná se o značně netriviální operaci, neboť program prakticky nemá jak bezchybně uhodnout,
@@ -43,4 +43,4 @@ větší minimální šířky odsazení nebo výplňového znaku, který je jina
 
 Pro diskuzi dalších limitací viz [technickou analýzu](/docs/Technical%20description%20and%20analysis%20(cz).md).
 
-Viz modul `viewing.py`.
+Viz modul `viewing.py`, výchozí funkce je `desugar(tab_width, tab_fill, view)`.
